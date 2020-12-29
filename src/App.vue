@@ -1,0 +1,21 @@
+<template>
+  <Nav />
+
+  <!-- 這裡的router-view會抓取Nav當中router-link的連結做為內容輸出 -->
+  <router-view />
+
+  <Footer />
+</template>
+
+<script>
+import Nav from './outerComponents/Nav.vue'
+import Footer from './outerComponents/Footer.vue'
+
+export default {
+  name: 'App',
+  components: {
+    Nav,
+    Footer
+  },
+}
+</script>

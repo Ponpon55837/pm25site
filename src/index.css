@@ -1,0 +1,115 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+#nav {
+  display: flex;
+  justify-content: center;
+  transition: all ease .5;
+  width: 100%;
+  top:0;
+  padding: 20px 0 20px 0;
+  background-color: #7EC1F1;
+}
+.opacityReduce {
+  position: fixed;
+  opacity: .7;
+  transition: all ease .5;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 10px;
+}
+
+#nav a:hover {
+  color: #ffffff;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+
+.controlbutton {
+  display: flex;
+  justify-content: center;
+}
+.controlbutton button {
+  margin: 10px 5px;
+  padding: 10px;
+  background: #D3F8FD;
+  border-radius: 10px;
+  border: none;
+  opacity: .7
+}
+.controlbutton button:hover {
+  opacity: 1;
+}
+
+
+.footer {
+  display: flex;
+  justify-content: center;
+  background-color: #96A9CA;
+  bottom: 0;
+  width: 100%;
+  padding: 20px 0;
+  opacity: .7;
+}
+.footer:hover {
+  opacity: 1;
+}
+
+.left {
+  text-align: left;
+  margin: 50px;
+}
+
+.siteOuter{
+  display: block;
+  margin: 0 6%;
+  flex-direction: column;
+}
+
+.site {
+  margin: 20px;
+  padding: 10px 40px;
+  border-radius: 20px;
+  float: left;
+  justify-content:flex-start;
+  background-color: #CFCED5;
+  max-width: 800px;
+}
+
+.site:hover {
+  transition: all ease .5;
+  background-color: #96A9CA;
+}
+
+.right {
+  position: fixed;
+  right: 5%;
+  bottom:  5%;
+  width: 80px;
+  height: 60px;
+  background-color: #fff;
+  border: none;
+  font-size: 50px;
+  font-weight: bold;
+  border-radius: 10px;
+  opacity: .3
+}
+
+.right:hover {
+  font-style: bold;
+  opacity: 0.7;
+}
