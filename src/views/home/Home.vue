@@ -6,7 +6,7 @@
         <input type="text" v-model="seachContent" />
         <button type="button" @click="seachContent = ''">Clear</button>
       </div>
-      <div class="site" v-for="site in pmData.records" :key="site.Site"s>
+      <div class="site" v-for="site in pmData.records" :key="site.Site">
         <h2>縣市名稱：{{ site.county }}</h2>
         <label>測站名稱：{{ site.Site }}</label>
         <p>PM 2.5 濃度：{{ site.PM25 }} {{ site.ItemUnit }}</p>
