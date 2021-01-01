@@ -117,13 +117,13 @@ body {
 .backdrop{
   position: fixed;
   top: 0;
-  /* left: 0; */
+  left: 0;
   display: flex;
   justify-content: center;
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.5);
-  z-index:5;
+  z-index:3;
 }
 .dropcontent {
   background-color: #ffffff;
@@ -131,5 +131,5 @@ body {
   max-width: 800px;
   position: fixed;
   top:25%;
-  /* left: ; */
+  padding: 20px;
 }

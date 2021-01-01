@@ -8,13 +8,11 @@
       </div>
 
       <div v-if="pmData">
-        <div class="site" v-for="site in pmData.records" :key="site.Site" @click="setShowHome(true)">
+        <div class="site" v-for="site in pmData.records" :key="site.Site" @click="setShowHome(true), setPassSite(site)">
           <h2>縣市名稱：{{ site.county }}</h2>
           <label>測站名稱：{{ site.Site }}</label>
-          <p>PM 2.5 濃度：{{ site.PM25 }} {{ site.ItemUnit }}</p>
-          <p>記錄時間： {{ site.DataCreationDate }}</p>
         </div>
-        <SingleHome v-if="showHome" :setShowHome="setShowHome" />
+        <SingleHome v-if="showHome" :setShowHome="setShowHome" :passSite="passSite" />
       </div>
       <div v-else>
         Data is loading...
@@ -38,6 +36,7 @@ export default {
   components: { SingleHome },
   setup() {
     const [showHome, setShowHome] = useState(false)
+    const [passSite, setPassSite] = useState('')
     const { pmData, error, jsonHandler } = getData()
 
     watchEffect(() => {
@@ -51,7 +50,7 @@ export default {
 
     const jumpTop = () => window.scrollTo(0, 0)
 
-    return { pmData, error, matchContent, jumpTop, showHome, setShowHome }
+    return { pmData, error, matchContent, jumpTop, showHome, setShowHome, passSite, setPassSite }
   }
 }
 </script>
