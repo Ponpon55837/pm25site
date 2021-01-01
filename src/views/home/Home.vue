@@ -3,15 +3,23 @@
     <h1>Home</h1>
     <div class="siteOuter">
       <div class="left">
-        <input type="text" v-model="seachContent" />
+        <input type="text" />
         <button type="button" @click="seachContent = ''">Clear</button>
       </div>
-      <div class="site" v-for="site in pmData.records" :key="site.Site">
-        <h2>縣市名稱：{{ site.county }}</h2>
-        <label>測站名稱：{{ site.Site }}</label>
-        <p>PM 2.5 濃度：{{ site.PM25 }} {{ site.ItemUnit }}</p>
-        <p>記錄時間： {{ site.DataCreationDate }}</p>
+
+      <div v-if="pmData">
+        <div class="site" v-for="site in pmData.records" :key="site.Site" @click="setShowHome(true)">
+          <h2>縣市名稱：{{ site.county }}</h2>
+          <label>測站名稱：{{ site.Site }}</label>
+          <p>PM 2.5 濃度：{{ site.PM25 }} {{ site.ItemUnit }}</p>
+          <p>記錄時間： {{ site.DataCreationDate }}</p>
+        </div>
+        <SingleHome v-if="showHome" :setShowHome="setShowHome" />
       </div>
+      <div v-else>
+        Data is loading...
+      </div>
+
       <div class="right" @click="jumpTop">
         <span class="text">Top</span>
       </div>
@@ -23,13 +31,13 @@
 import { ref, watchEffect, computed } from 'vue'
 import SingleHome from './SingleHome.vue'
 import getData from '../../composables/getData.js'
+import { useState } from '../../composables/state.js'
 
 export default {
   name: "Home",
   components: { SingleHome },
   setup() {
-    const seachContent = ref('')
-    // const showHome = ref(false)
+    const [showHome, setShowHome] = useState(false)
     const { pmData, error, jsonHandler } = getData()
 
     watchEffect(() => {
@@ -43,7 +51,7 @@ export default {
 
     const jumpTop = () => window.scrollTo(0, 0)
 
-    return { pmData, error, matchContent, jumpTop, seachContent }
+    return { pmData, error, matchContent, jumpTop, showHome, setShowHome }
   }
 }
 </script>
