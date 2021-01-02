@@ -3,8 +3,9 @@
     <h1>Home</h1>
     <div class="siteOuter">
       <div class="left">
-        <input type="text" />
-        <button type="button" @click="seachContent = ''">Clear</button>
+        <input type="text" v-model='searchContent' />
+        {{ searchContent }}
+        <button type="button" @click="searchContent = ''">Clear</button>
       </div>
 
       <div v-if="pmData">
@@ -37,6 +38,8 @@ export default {
   setup() {
     const [showHome, setShowHome] = useState(false)
     const [passSite, setPassSite] = useState('')
+    const [originData, setOriginData] = useState()
+    const searchContent = ref('')
     const { pmData, error, jsonHandler } = getData()
 
     watchEffect(() => {
@@ -45,12 +48,12 @@ export default {
 
     const matchContent = computed(() => {
       // 如果searchMember的值有變動，進行計算，這邊是回返一個過濾過只包含目前searchMember有的值的陣列，當searchMember為空值，則會回返一個完整的members陣列
-      return pmData.value.filter(item => item.includes(seachContent.value))
+      return pmData.value.filter(item => item.includes(searchContent.value))
     })
 
     const jumpTop = () => window.scrollTo(0, 0)
 
-    return { pmData, error, matchContent, jumpTop, showHome, setShowHome, passSite, setPassSite }
+    return { pmData, error, matchContent, jumpTop, showHome, setShowHome, passSite, setPassSite, searchContent }
   }
 }
 </script>

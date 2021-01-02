@@ -81,13 +81,14 @@ body {
 }
 
 .site {
+  max-width: 800px;
+  min-width: 180px;
   margin: 20px;
   padding: 10px 40px;
   border-radius: 20px;
   float: left;
   justify-content:flex-start;
   background-color: #CFCED5;
-  max-width: 800px;
 }
 
 .site:hover {
