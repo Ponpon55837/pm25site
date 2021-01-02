@@ -8,3 +8,12 @@ export const useState = (initialState) => {
 
   return [readonly(state), setState]
 }
+
+export function useReducer(reducer, initialArg, init) {
+  const state = ref(init ? init(initialArg) : initialArg)
+  const dispatch = (action) => {
+    state.value = reducer(state.value, action)
+  }
+
+  return [readonly(state), dispatch]
+}
