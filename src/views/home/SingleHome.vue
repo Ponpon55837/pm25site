@@ -13,7 +13,7 @@
 export default {
   props: ['passSite', 'setShowHome'],
   setup(props) {
-    console.log(props.passSite)
+
   }
 }
 </script>

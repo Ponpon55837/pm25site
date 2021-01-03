@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  background: #CFE1DA;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -26,9 +27,11 @@ body {
 }
 
 #nav a {
+  font-size: 1.5rem;
   font-weight: bold;
   color: #2c3e50;
   margin: 10px;
+  text-decoration:none;
 }
 
 #nav a:hover {
@@ -72,28 +75,35 @@ body {
 .left {
   text-align: left;
   margin: 50px;
+  min-width: 100px;
 }
 
 .siteOuter{
   display: block;
-  margin: 0 6%;
+  margin: 0 6% 0 13%;
   flex-direction: column;
 }
 
 .site {
+  border: solid 2px;
+  border-color: #fff;
   max-width: 800px;
   min-width: 180px;
   margin: 20px;
-  padding: 10px 40px;
+  padding: 10px 30px;
   border-radius: 20px;
   float: left;
   justify-content:flex-start;
   background-color: #CFCED5;
 }
+.site label {
+  font-size: .9rem;
+}
 
 .site:hover {
   transition: all ease .5;
   background-color: #96A9CA;
+  cursor: pointer;
 }
 
 .right {
@@ -107,7 +117,9 @@ body {
   font-size: 20px;
   font-weight: bold;
   border-radius: 10px;
-  opacity: .3
+  opacity: .3;
+  z-index: 2;
+  cursor: pointer;
 }
 
 .right:hover {
@@ -125,12 +137,17 @@ body {
   height: 100%;
   background: rgba(0,0,0,0.5);
   z-index:3;
+  cursor: pointer;
 }
 .dropcontent {
   background-color: #ffffff;
   border-radius: 25px;
+  border: solid 3px;
+  border-color: #90B57D;
+  background-color: #CFE1DA;
   max-width: 800px;
   position: fixed;
   top:25%;
   padding: 20px;
+  cursor: none;
 }
