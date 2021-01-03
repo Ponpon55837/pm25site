@@ -3,6 +3,7 @@
     <h1>Home</h1>
     <div class="siteOuter">
       <div class="left">
+        <label>搜尋城市：</label>
         <input type="text" v-model='searchContent' />
         <button type="button" @click="searchContent = ''">Clear</button>
       </div>
@@ -47,7 +48,7 @@ export default {
       // 如果searchMember的值有變動，進行計算，這邊是回返一個過濾過只包含目前searchMember有的值的陣列，當searchMember為空值，則會回返一個完整的members陣列
       // console.log(pmData.value.filter(item => item.includes('')))
 
-      return pmData.value.filter(e => e)
+      return pmData.value.filter(e => e.county.includes(searchContent.value) || e.Site.includes(searchContent.value))
     })
 
     const jumpTop = () => window.scrollTo(0, 0)
