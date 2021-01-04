@@ -215,6 +215,16 @@ label {
   cursor: none;
 }
 
+.dropAir {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  max-width: 1000px;
+  cursor:auto;
+  font-size: .843rem;
+}
+
 .backCircle {
   opacity: .8;
   background-color: #90B57D;

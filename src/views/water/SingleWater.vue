@@ -1,6 +1,6 @@
 <template>
   <div @click="setShowWater(false)" class="backdrop">
-    <div class="dropcontent">
+    <div class="dropcontent dropWater">
       <h3>區域：{{ passSite.Area }}</h3>
       <h3>縣市名稱：{{ passSite.County }} {{ passSite.Township }}</h3>
       <label>酸雨pH值：{{ passSite.Result_Value ? passSite.Result_Value : '未檢測' }}mm</label><br />
