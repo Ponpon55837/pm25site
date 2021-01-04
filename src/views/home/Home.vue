@@ -1,6 +1,7 @@
 <template>
   <div class=''>
-    <h1>Home</h1>
+    <!-- <h1>Home</h1> -->
+
     <div class="siteOuter">
       <div class="left">
         <label>搜尋城市：</label>

@@ -60,8 +60,8 @@ label {
   transition: all ease .5;
   width: 100%;
   top:0;
-  padding: 20px 0 20px 0;
-  background-color: #7EC1F1;
+  padding: 5px 0 5px 0;
+  /* background-color: #7EC1F1; */
 }
 .opacityReduce {
   position: fixed;
@@ -75,10 +75,13 @@ label {
   color: #2c3e50;
   margin: 10px;
   text-decoration:none;
+  transition: all ease .3;
 }
 
 #nav a:hover {
+  transition: all ease .3;
   color: #ffffff;
+  text-decoration: underline;
 }
 
 #nav a.router-link-exact-active {
@@ -195,4 +198,28 @@ label {
   top:25%;
   padding: 20px;
   cursor: none;
+}
+
+.backCircle {
+  opacity: .8;
+  background-color: #90B57D;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top:0;
+  left: 0;
+  clip-path: circle(600px at left top)
+}
+
+.backCircle2 {
+  opacity: .6;
+  background-color: #7EC1F1;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top:0;
+  left: 0;
+  clip-path: circle(400px at right bottom)
 }
