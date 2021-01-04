@@ -4,6 +4,12 @@ body {
   background: #CFE1DA;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 input {
   border-top-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -88,6 +94,9 @@ label {
   color: #42b983;
 }
 
+.main {
+  display: flex;
+}
 .controlbutton {
   display: flex;
   justify-content: center;
@@ -103,8 +112,6 @@ label {
 .controlbutton button:hover {
   opacity: 1;
 }
-
-
 .footer {
   display: flex;
   justify-content: center;
@@ -170,7 +177,6 @@ label {
   border-radius: 10px;
   opacity: .3;
   z-index: 2;
-  padding: 4px;
   cursor: pointer;
 }
 

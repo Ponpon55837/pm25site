@@ -1,5 +1,5 @@
 <template>
-  <div class=''>
+  <div class='main'>
     <!-- <h1>Home</h1> -->
 
     <div class="siteOuter">
