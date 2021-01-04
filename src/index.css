@@ -70,9 +70,14 @@ label {
   /* background-color: #7EC1F1; */
 }
 .opacityReduce {
+  background-color: #fff;
   position: fixed;
-  opacity: .7;
+  opacity: .3;
   transition: all ease .5;
+}
+
+.opacityReduce:hover {
+  opacity: 7;
 }
 
 #nav a {
@@ -86,7 +91,7 @@ label {
 
 #nav a:hover {
   transition: all ease .3;
-  color: #ffffff;
+  color: #96A9CA;
   text-decoration: underline;
 }
 

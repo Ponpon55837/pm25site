@@ -17,7 +17,7 @@ const routes = [
     path: '/air',
     name: 'Air',
     component: Air
-  },{
+  }, {
   // catch all 404，使用catchAll去判斷這個網址存不存在
     path: '/:catchAll(.*)',
     name: 'NotFound',

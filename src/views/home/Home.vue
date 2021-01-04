@@ -29,7 +29,7 @@
 <script>
 import { ref, watchEffect, computed } from 'vue'
 import SingleHome from './SingleHome.vue'
-import getData from '../../composables/getData.js'
+import getPMData from '../../composables/getPMData.js'
 import { useState } from '../../composables/state.js'
 
 export default {
@@ -39,7 +39,7 @@ export default {
     const [showHome, setShowHome] = useState(false)
     const [passSite, setPassSite] = useState('')
     const searchContent = ref('')
-    const { pmData, error, jsonHandler } = getData()
+    const { pmData, error, jsonHandler } = getPMData()
 
     watchEffect(() => {
       jsonHandler()

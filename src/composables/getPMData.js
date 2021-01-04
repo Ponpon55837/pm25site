@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-const getData = () => {
+const getPMData = () => {
   const pmData = ref([])
   const error = ref(null)
   const jsonHandler = async () => {
@@ -21,7 +21,6 @@ const getData = () => {
     try {
       const response = await fetch(`https://data.epa.gov.tw/api/v1/aqx_p_02?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json`);
       const result = await response.json()
-      console.log(result.records)
       return pmData.value = result.records
     } catch (err) {
       return error.value = err.message
@@ -31,4 +30,4 @@ const getData = () => {
   return { pmData, error, jsonHandler }
 }
 
-export default getData
+export default getPMData
