@@ -3,6 +3,49 @@ body {
   padding: 0;
   background: #CFE1DA;
 }
+
+input {
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: solid 1px;
+  border-color: #fff;
+  transition: all ease .3s;
+  min-width: 100px;
+  min-height: 20px;
+  padding: 5px;
+  background-color: #AFC29E;
+}
+
+input:hover {
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  transition: all ease .3s;
+}
+
+button {
+  border: solid 1px;
+  border-color: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  font-weight: 700;
+  font-size: 1rem;
+  opacity: .9;
+  transition: all ease .3;
+  color: #C7AF99;
+}
+
+button:hover {
+  opacity: 1;
+  transition: all ease .3;
+  color: #000;
+}
+
+label {
+  font-weight: 500;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -95,15 +138,17 @@ body {
   float: left;
   justify-content:flex-start;
   background-color: #CFCED5;
+  transition: all ease .3s;
 }
 .site label {
   font-size: .9rem;
 }
 
 .site:hover {
-  transition: all ease .5;
+  transition: all ease .3s;
   background-color: #96A9CA;
   cursor: pointer;
+  color: #fff;
 }
 
 .right {

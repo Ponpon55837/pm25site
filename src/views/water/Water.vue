@@ -11,7 +11,7 @@
       <div v-if="waterData">
         <div class="site" v-for="(site, idx) in matchContent" :key="site.SiteId + idx" @click="setShowWater(true), setPassSite(site)">
           <h3>區域：{{ site.Area }}</h3>
-          <h3>縣市名稱：{{ site.County }}</h3>
+          <h4>縣市名稱：{{ site.County }}</h4>
           <label>測站名稱：{{ site.Township }}</label>
         </div>
         <SingleWater v-if="showWater" :setShowWater="setShowWater" :passSite="passSite" />
