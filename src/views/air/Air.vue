@@ -8,7 +8,7 @@
         <button type="button" @click="searchContent = ''">Clear</button>
       </div>
 
-      <div v-if="airData">
+      <div v-if="originData">
         <div class="site" v-for="(air, idx) in matchContent" :key="air + idx" @click="setShowAir(true), setPassSite(air)">
           <h3>{{ air.Area }}</h3>
           <h4>{{ air.MajorPollutant ? air.MajorPollutant : '未記錄' }}</h4>
@@ -30,31 +30,30 @@
 <script>
 import { ref, watchEffect, computed } from 'vue'
 import SingleAir from './SingleAir.vue'
-import getAirData from '../../composables/getAirData.js'
+import getData from '../../composables/getData.js'
 import { useState } from '../../composables/state.js'
 
 export default {
   name: 'Air',
   components: { SingleAir },
   setup() {
+    const  url = `https://data.epa.gov.tw/api/v1/aqf_p_01?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json`
     const [showAir, setShowAir] = useState(false)
     const [passSite, setPassSite] = useState('')
     const searchContent = ref('')
-    const { airData, error, jsonHandler } = getAirData()
+    const { originData, error, jsonHandler } = getData()
 
     watchEffect(() => {
-      jsonHandler()
-    }, () => {
-      matchContent()
+      jsonHandler(url)
     })
 
     const matchContent = computed(() => {
-      return airData.value.sort((x,y) => x.ForecastDate > y.ForecastDate).sort((a,b) => a === b).filter(e => e.Area.includes(searchContent.value))
+      return originData.value.sort((x,y) => x.ForecastDate > y.ForecastDate).sort((a,b) => a === b).filter(e => e.Area.includes(searchContent.value))
     })
 
     const jumpTop = () => window.scrollTo(0, 0)
 
-    return { airData, error, matchContent, jumpTop, showAir, setShowAir, passSite, setPassSite, searchContent }
+    return { originData, error, matchContent, jumpTop, showAir, setShowAir, passSite, setPassSite, searchContent }
   }
 }
 </script>

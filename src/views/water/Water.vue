@@ -8,7 +8,7 @@
         <button type="button" @click="searchContent = ''">Clear</button>
       </div>
 
-      <div v-if="waterData">
+      <div v-if="originData">
         <div class="site" v-for="(site, idx) in matchContent" :key="site.SiteId + idx" @click="setShowWater(true), setPassSite(site)">
           <h3>區域：{{ site.Area }}</h3>
           <h4>縣市名稱：{{ site.County }}</h4>
@@ -30,31 +30,30 @@
 <script>
 import { ref, watchEffect, computed } from 'vue'
 import SingleWater from './SingleWater.vue'
-import getWaterData from '../../composables/getWaterData.js'
+import getData from '../../composables/getData.js'
 import { useState } from '../../composables/state.js'
 
 export default {
   name: "Water",
   components: { SingleWater },
   setup() {
+    const url = `https://data.epa.gov.tw/api/v1/acidr_p_01?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json`
     const [showWater, setShowWater] = useState(false)
     const [passSite, setPassSite] = useState('')
     const searchContent = ref('')
-    const { waterData, error, jsonHandler } = getWaterData()
+    const { originData, error, jsonHandler } = getData()
 
     watchEffect(() => {
-      jsonHandler()
-    }, () => {
-      matchContent()
+      jsonHandler(url)
     })
 
     const matchContent = computed(() => {
-      return waterData.value.filter(e => e.County.includes(searchContent.value) || e.Township.includes(searchContent.value) || e.Area.includes(searchContent.value))
+      return originData.value.filter(e => e.County.includes(searchContent.value) || e.Township.includes(searchContent.value) || e.Area.includes(searchContent.value))
     })
 
     const jumpTop = () => window.scrollTo(0, 0)
 
-    return { waterData, error, matchContent, jumpTop, showWater, setShowWater, passSite, setPassSite, searchContent }
+    return { originData, error, matchContent, jumpTop, showWater, setShowWater, passSite, setPassSite, searchContent }
   }
 }
 </script>

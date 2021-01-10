@@ -8,7 +8,7 @@
         <input type="text" v-model='searchContent' />
         <button type="button" @click="searchContent = ''">Clear</button>
       </div>
-      <div v-if="pmData">
+      <div v-if="originData">
         <div class="site" v-for="site in matchContent" :key="site.Site" @click="setShowHome(true), setPassSite(site)">
           <h3>縣市名稱：{{ site.county }}</h3>
           <label>測站名稱：{{ site.Site }}</label>
@@ -29,32 +29,33 @@
 <script>
 import { ref, watchEffect, computed } from 'vue'
 import SingleHome from './SingleHome.vue'
-import getPMData from '../../composables/getPMData.js'
+import getData from '../../composables/getData.js'
 import { useState } from '../../composables/state.js'
 
 export default {
   name: "Home",
   components: { SingleHome },
   setup() {
+    const url = `https://data.epa.gov.tw/api/v1/aqx_p_02?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json`
     const [showHome, setShowHome] = useState(false)
     const [passSite, setPassSite] = useState('')
     const searchContent = ref('')
-    const { pmData, error, jsonHandler } = getPMData()
+    const { originData, error, jsonHandler } = getData()
 
     watchEffect(() => {
-      jsonHandler()
+      jsonHandler(url)
     })
 
     const matchContent = computed(() => {
       // 如果searchMember的值有變動，進行計算，這邊是回返一個過濾過只包含目前searchMember有的值的陣列，當searchMember為空值，則會回返一個完整的members陣列
       // console.log(pmData.value.filter(item => item.includes('')))
 
-      return pmData.value.filter(e => e.county.includes(searchContent.value) || e.Site.includes(searchContent.value))
+      return originData.value.filter(e => e.county.includes(searchContent.value) || e.Site.includes(searchContent.value))
     })
 
     const jumpTop = () => window.scrollTo(0, 0)
 
-    return { pmData, error, matchContent, jumpTop, showHome, setShowHome, passSite, setPassSite, searchContent }
+    return { originData, error, matchContent, jumpTop, showHome, setShowHome, passSite, setPassSite, searchContent }
   }
 }
 </script>
