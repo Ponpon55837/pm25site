@@ -5,7 +5,7 @@ const getData = () => {
   const originData = ref([])
   const error = ref(null)
   const jsonHandler = async (url) => {
-    axios.get(url)
+    await axios.get(url)
     .then(res => {
       return originData.value = res.data.records
     })
