@@ -7,19 +7,24 @@
 </template>
 
 <script>
+import { useState } from '../composables/state.js'
+
 export default {
-  data() {
-    return {
-      active: false
-    }
-  },
   created() {
-      window.addEventListener("scroll", this.handleScroll);
-    },
-  methods: {
-    handleScroll() {
-      this.active = window.scrollY > 20 ? true : false
+    window.addEventListener("scroll", this.handleScroll)
+    window.addEventListener("scroll", this.handleScrollX)
+  },
+  setup() {
+    const [active, setActive] = useState(false)
+    const handleScroll = () => {
+      if(window.scrollY > 20) {
+        setActive(true)
+      }else {
+        setActive(false)
+      }
     }
+
+    return { active, handleScroll }
   }
 }
 </script>
