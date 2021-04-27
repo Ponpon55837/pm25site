@@ -1,5 +1,5 @@
 <template>
-  <div @click="setShowAir(false)" class="backdrop">
+  <div @click="loadView()" class="backdrop">
     <div class="dropcontent dropAir">
       <h3>地區：{{ passSite.Area }}</h3>
       <label>AQI：{{ passSite.AQI }}</label><br />
@@ -11,10 +11,15 @@
 </template>
 
 <script>
-export default {
-  props: ['passSite', 'setShowAir'],
-  setup(props) {
+import { useStore } from 'vuex'
 
+export default {
+  props: ['passSite'],
+  setup() {
+    const store = useStore()
+    const loadView = () => store.commit('loadView')
+
+    return { loadView }
   }
 }
 </script>

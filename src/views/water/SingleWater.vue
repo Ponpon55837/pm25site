@@ -1,5 +1,5 @@
 <template>
-  <div @click="setShowWater(false)" class="backdrop">
+  <div @click="loadView()" class="backdrop">
     <div class="dropcontent dropWater">
       <h3>區域：{{ passSite.Area }}</h3>
       <h3>縣市名稱：{{ passSite.County }} {{ passSite.Township }}</h3>
@@ -11,10 +11,16 @@
 </template>
 
 <script>
-export default {
-  props: ['passSite', 'setShowWater'],
-  setup(props) {
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
+export default {
+  props: ['passSite'],
+  setup() {
+    const store = useStore()
+    const loadView = () =>store.commit('loadView')
+
+    return { loadView }
   }
 }
 </script>

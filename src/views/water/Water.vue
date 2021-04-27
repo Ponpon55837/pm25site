@@ -9,12 +9,12 @@
       </div>
 
       <div v-if="originData">
-        <div class="site" v-for="(site, idx) in matchContent" :key="site.SiteId + idx" @click="setShowWater(true), setPassSite(site)">
+        <div class="site" v-for="(site, idx) in matchContent" :key="site.SiteId + idx" @click="loadView(), setPassSite(site)">
           <h3>區域：{{ site.Area }}</h3>
           <h4>縣市名稱：{{ site.County }}</h4>
           <label>測站名稱：{{ site.Township }}</label>
         </div>
-        <SingleWater v-if="showWater" :setShowWater="setShowWater" :passSite="passSite" />
+        <SingleWater v-if="showView" :passSite="passSite" />
       </div>
       <div v-else>
         Data is loading...
@@ -32,13 +32,16 @@ import { ref, watchEffect, computed } from 'vue'
 import SingleWater from './SingleWater.vue'
 import getData from '../../composables/getData.js'
 import { useState } from '../../composables/state.js'
+import { useStore } from 'vuex'
 
 export default {
   name: "Water",
   components: { SingleWater },
   setup() {
     const url = `https://data.epa.gov.tw/api/v1/acidr_p_01?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json`
-    const [showWater, setShowWater] = useState(false)
+    const store = useStore()
+    const showView = computed(() => store.state.showView)
+    const loadView = () => store.commit("loadView")
     const [passSite, setPassSite] = useState('')
     const searchContent = ref('')
     const { originData, error, jsonHandler } = getData()
@@ -53,7 +56,7 @@ export default {
 
     const jumpTop = () => window.scrollTo(0, 0)
 
-    return { originData, error, matchContent, jumpTop, showWater, setShowWater, passSite, setPassSite, searchContent }
+    return { originData, error, matchContent, jumpTop, showView, loadView, passSite, setPassSite, searchContent }
   }
 }
 </script>

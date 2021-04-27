@@ -1,5 +1,5 @@
 <template>
-  <div @click="setShowHome(false)" class="backdrop">
+  <div @click="loadView()" class="backdrop">
     <div class="dropcontent dropPm">
       <h2>縣市名稱：{{ passSite.county }}</h2>
       <label>測站名稱：{{ passSite.Site }}</label>
@@ -10,10 +10,15 @@
 </template>
 
 <script>
-export default {
-  props: ['passSite', 'setShowHome'],
-  setup(props) {
+import { useStore } from 'vuex'
 
+export default {
+  props: ['passSite'],
+  setup(props) {
+    const store = useStore()
+    const loadView = () => store.commit('loadView')
+
+    return { loadView }
   }
 }
 </script>
