@@ -38,14 +38,13 @@ export default {
   name: 'Air',
   components: { SingleAir },
   setup() {
-    const  url = `https://data.epa.gov.tw/api/v1/aqf_p_01?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json`
-    const { showView, loadView } = useView()
+    const { showView, loadView, initAirUrl } = useView()
     const [passSite, setPassSite] = useState('')
     const searchContent = ref('')
     const { originData, error, jsonHandler } = getData()
 
     watchEffect(() => {
-      jsonHandler(url)
+      jsonHandler(initAirUrl)
     })
 
     const matchContent = computed(() => {

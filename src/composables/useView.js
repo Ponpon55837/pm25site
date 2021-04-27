@@ -6,7 +6,11 @@ const useView = () => {
     const showView = computed(() =>store.state.showView)
     const loadView = () => store.commit("SET_SHOWVIEW")
 
-    return { showView, loadView }
+    const initAirUrl = store.state.setAirUrl
+    const initHomeUrl = store.state.setHomeUrl
+    const initWaterUrl = store.state.setWaterUrl
+
+    return { showView, loadView, initAirUrl, initHomeUrl, initWaterUrl }
 }
 
 export default useView

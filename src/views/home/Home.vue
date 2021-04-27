@@ -37,14 +37,13 @@ export default {
   name: "Home",
   components: { SingleHome },
   setup() {
-    const url = `https://data.epa.gov.tw/api/v1/aqx_p_02?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json`
-    const { showView, loadView } = useView()
+    const { showView, loadView, initHomeUrl } = useView()
     const [passSite, setPassSite] = useState('')
     const searchContent = ref('')
     const { originData, error, jsonHandler } = getData()
 
     watchEffect(() => {
-      jsonHandler(url)
+      jsonHandler(initHomeUrl)
     })
 
     const matchContent = computed(() => {
