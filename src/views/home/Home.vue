@@ -31,16 +31,14 @@ import { ref, watchEffect, computed } from 'vue'
 import SingleHome from './SingleHome.vue'
 import getData from '../../composables/getData.js'
 import { useState } from '../../composables/state.js'
-import { useStore } from 'vuex'
+import useView from '../../composables/useView'
 
 export default {
   name: "Home",
   components: { SingleHome },
   setup() {
     const url = `https://data.epa.gov.tw/api/v1/aqx_p_02?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json`
-    const store = useStore()
-    const showView = computed(() => store.state.showView)
-    const loadView = () => store.commit("loadView")
+    const { showView, loadView } = useView()
     const [passSite, setPassSite] = useState('')
     const searchContent = ref('')
     const { originData, error, jsonHandler } = getData()

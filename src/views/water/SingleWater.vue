@@ -11,14 +11,13 @@
 </template>
 
 <script>
-import { computed } from 'vue'
-import { useStore } from 'vuex'
+import useView from '../../composables/useView'
+
 
 export default {
   props: ['passSite'],
   setup() {
-    const store = useStore()
-    const loadView = () =>store.commit('loadView')
+    const { loadView } = useView()
 
     return { loadView }
   }
