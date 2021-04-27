@@ -9,12 +9,12 @@
       </div>
 
       <div v-if="originData">
-        <div class="site" v-for="(air, idx) in matchContent" :key="air + idx" @click="setShowAir(true), setPassSite(air)">
+        <div class="site" v-for="(air, idx) in matchContent" :key="air + idx" @click="loadView(), setPassSite(air)">
           <h3>{{ air.Area }}</h3>
           <h4>{{ air.MajorPollutant ? air.MajorPollutant : '未記錄' }}</h4>
           <label>{{ air.PublishTime }}</label>
         </div>
-        <SingleAir v-if="showAir" :passSite="passSite" :setShowAir="setShowAir" />
+        <SingleAir v-if="showView" :passSite="passSite" />
       </div>
       <div v-else>
         Data is loading...
@@ -32,13 +32,16 @@ import { ref, watchEffect, computed } from 'vue'
 import SingleAir from './SingleAir.vue'
 import getData from '../../composables/getData.js'
 import { useState } from '../../composables/state.js'
+import { useStore } from 'vuex'
 
 export default {
   name: 'Air',
   components: { SingleAir },
   setup() {
     const  url = `https://data.epa.gov.tw/api/v1/aqf_p_01?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json`
-    const [showAir, setShowAir] = useState(false)
+    const store = useStore()
+    const showView = computed(() => store.state.showView)
+    const loadView = () => store.commit("loadView")
     const [passSite, setPassSite] = useState('')
     const searchContent = ref('')
     const { originData, error, jsonHandler } = getData()
@@ -53,7 +56,7 @@ export default {
 
     const jumpTop = () => window.scrollTo(0, 0)
 
-    return { originData, error, matchContent, jumpTop, showAir, setShowAir, passSite, setPassSite, searchContent }
+    return { originData, error, matchContent, jumpTop, showView, loadView, passSite, setPassSite, searchContent }
   }
 }
 </script>

@@ -9,11 +9,11 @@
         <button type="button" @click="searchContent = ''">Clear</button>
       </div>
       <div v-if="originData">
-        <div class="site" v-for="site in matchContent" :key="site.Site" @click="setShowHome(true), setPassSite(site)">
+        <div class="site" v-for="site in matchContent" :key="site.Site" @click="loadView(), setPassSite(site)">
           <h3>縣市名稱：{{ site.county }}</h3>
           <label>測站名稱：{{ site.Site }}</label>
         </div>
-        <SingleHome v-if="showHome" :setShowHome="setShowHome" :passSite="passSite" />
+        <SingleHome v-if="showView" :passSite="passSite" />
       </div>
       <div v-else>
         Data is loading...
@@ -31,13 +31,16 @@ import { ref, watchEffect, computed } from 'vue'
 import SingleHome from './SingleHome.vue'
 import getData from '../../composables/getData.js'
 import { useState } from '../../composables/state.js'
+import { useStore } from 'vuex'
 
 export default {
   name: "Home",
   components: { SingleHome },
   setup() {
     const url = `https://data.epa.gov.tw/api/v1/aqx_p_02?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json`
-    const [showHome, setShowHome] = useState(false)
+    const store = useStore()
+    const showView = computed(() => store.state.showView)
+    const loadView = () => store.commit("loadView")
     const [passSite, setPassSite] = useState('')
     const searchContent = ref('')
     const { originData, error, jsonHandler } = getData()
@@ -55,7 +58,7 @@ export default {
 
     const jumpTop = () => window.scrollTo(0, 0)
 
-    return { originData, error, matchContent, jumpTop, showHome, setShowHome, passSite, setPassSite, searchContent }
+    return { originData, error, matchContent, jumpTop, showView, loadView, passSite, setPassSite, searchContent }
   }
 }
 </script>
