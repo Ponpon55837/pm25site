@@ -16,9 +16,12 @@
         </div>
         <SingleWater v-if="showView" :passSite="passSite" />
       </div>
-      <div v-else>
-        Data is loading...
-      </div>
+      
+      <Loading 
+        :matchContent='matchContent' 
+        :searchContent='searchContent' 
+        :loadState='loadState' 
+        :error='error' />
 
       <div class="right" @click="jumpTop">
         <span class="text">Top</span>
@@ -30,15 +33,16 @@
 <script>
 import { ref, watchEffect, computed } from 'vue'
 import SingleWater from './SingleWater.vue'
+import Loading from '../../outerComponents/Loading.vue'
 import getData from '../../composables/getData.js'
 import { useState } from '../../composables/state.js'
 import useView from '../../composables/useView'
 
 export default {
   name: "Water",
-  components: { SingleWater },
+  components: { SingleWater, Loading },
   setup() {
-    const { showView, loadView, initWaterUrl } = useView()
+    const { showView, loadView, initWaterUrl, loadState } = useView()
     const [passSite, setPassSite] = useState('')
     const searchContent = ref('')
     const { originData, error, jsonHandler } = getData()
@@ -53,7 +57,7 @@ export default {
 
     const jumpTop = () => window.scrollTo(0, 0)
 
-    return { originData, error, matchContent, jumpTop, showView, loadView, passSite, setPassSite, searchContent }
+    return { originData, error, matchContent, jumpTop, showView, loadView, loadState, passSite, setPassSite, searchContent }
   }
 }
 </script>

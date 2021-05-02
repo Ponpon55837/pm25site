@@ -1,16 +1,27 @@
 import { ref } from 'vue'
 import axios from 'axios'
+import useView from './useView'
 
 const getData = () => {
   const originData = ref([])
   const error = ref(null)
+
+  const { loadState ,setLoadState, loadView } = useView()
   const jsonHandler = async (url) => {
+
+    axios.defaults.timeout = 1
+
     await axios.get(url)
     .then(res => {
       return originData.value = res.data.records
     })
     .catch(err => {
+      loadView()
+      setLoadState()
       return error.value = err.message
+    })
+    .finally(() => {
+      return loadState
     })
     // try {
     //   const response = await fetch(url);

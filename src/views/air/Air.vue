@@ -16,9 +16,12 @@
         </div>
         <SingleAir v-if="showView" :passSite="passSite" />
       </div>
-      <div v-else>
-        Data is loading...
-      </div>
+
+      <Loading 
+        :matchContent='matchContent' 
+        :searchContent='searchContent' 
+        :loadState='loadState' 
+        :error='error' />
 
       <div class="right" @click="jumpTop">
         <span class="text">Top</span>
@@ -30,15 +33,16 @@
 <script>
 import { ref, watchEffect, computed } from 'vue'
 import SingleAir from './SingleAir.vue'
+import Loading from '../../outerComponents/Loading.vue'
 import getData from '../../composables/getData.js'
 import { useState } from '../../composables/state.js'
 import useView from '../../composables/useView'
 
 export default {
   name: 'Air',
-  components: { SingleAir },
+  components: { SingleAir, Loading },
   setup() {
-    const { showView, loadView, initAirUrl } = useView()
+    const { showView, loadView, initAirUrl, loadState } = useView()
     const [passSite, setPassSite] = useState('')
     const searchContent = ref('')
     const { originData, error, jsonHandler } = getData()
@@ -53,7 +57,7 @@ export default {
 
     const jumpTop = () => window.scrollTo(0, 0)
 
-    return { originData, error, matchContent, jumpTop, showView, loadView, passSite, setPassSite, searchContent }
+    return { originData, error, matchContent, jumpTop, showView, loadView, loadState, passSite, setPassSite, searchContent }
   }
 }
 </script>

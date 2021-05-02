@@ -8,17 +8,20 @@
         <input type="text" v-model='searchContent' />
         <button type="button" @click="searchContent = ''">Clear</button>
       </div>
-      <div v-if="originData">
+      <div v-if="matchContent">
         <div class="site" v-for="site in matchContent" :key="site.Site" @click="loadView(), setPassSite(site)">
           <h3>縣市名稱：{{ site.county }}</h3>
           <label>測站名稱：{{ site.Site }}</label>
         </div>
         <SingleHome v-if="showView" :passSite="passSite" />
       </div>
-      <div v-else>
-        Data is loading...
-      </div>
-
+      
+      <Loading 
+        :matchContent='matchContent' 
+        :searchContent='searchContent' 
+        :loadState='loadState' 
+        :error='error' />
+      
       <div class="right" @click="jumpTop">
         <span class="text">Top</span>
       </div>
@@ -29,15 +32,16 @@
 <script>
 import { ref, watchEffect, computed } from 'vue'
 import SingleHome from './SingleHome.vue'
+import Loading from '../../outerComponents/Loading.vue'
 import getData from '../../composables/getData.js'
 import { useState } from '../../composables/state.js'
 import useView from '../../composables/useView'
 
 export default {
   name: "Home",
-  components: { SingleHome },
+  components: { SingleHome, Loading },
   setup() {
-    const { showView, loadView, initHomeUrl } = useView()
+    const { showView, loadView, initHomeUrl, loadState } = useView()
     const [passSite, setPassSite] = useState('')
     const searchContent = ref('')
     const { originData, error, jsonHandler } = getData()
@@ -55,7 +59,7 @@ export default {
 
     const jumpTop = () => window.scrollTo(0, 0)
 
-    return { originData, error, matchContent, jumpTop, showView, loadView, passSite, setPassSite, searchContent }
+    return { originData, error, matchContent, jumpTop, showView, loadView, loadState, passSite, setPassSite, searchContent }
   }
 }
 </script>

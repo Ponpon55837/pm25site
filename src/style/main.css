@@ -105,3 +105,8 @@
   left: 0;
   clip-path: circle(400px at right bottom)
 }
+
+.rotateLoading {
+  transition: transform 1s;
+  transform: rotate(360deg);
+}
