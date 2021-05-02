@@ -142,3 +142,8 @@ label {
   font-style: bold;
   opacity: 0.7;
 }
+
+.loading {
+  display: flex;
+  justify-content: center;
+}
