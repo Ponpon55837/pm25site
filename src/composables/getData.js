@@ -9,7 +9,7 @@ const getData = () => {
   const { loadState ,setLoadState, loadView } = useView()
   const jsonHandler = async (url) => {
 
-    axios.defaults.timeout = 1
+    axios.defaults.timeout = 10000
 
     await axios.get(url)
     .then(res => {
