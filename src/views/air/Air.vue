@@ -30,7 +30,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, watchEffect, computed } from 'vue'
 import SingleAir from './SingleAir.vue'
 import Loading from '../../outerComponents/Loading.vue'
@@ -38,26 +38,18 @@ import getData from '../../composables/getData.js'
 import { useState } from '../../composables/state.js'
 import useView from '../../composables/useView'
 
-export default {
-  name: 'Air',
-  components: { SingleAir, Loading },
-  setup() {
-    const { showView, loadView, initAirUrl, loadState } = useView()
-    const [passSite, setPassSite] = useState('')
-    const searchContent = ref('')
-    const { originData, error, jsonHandler } = getData()
+const { showView, loadView, initAirUrl, loadState } = useView()
+const [passSite, setPassSite] = useState('')
+const searchContent = ref('')
+const { originData, error, jsonHandler } = getData()
 
-    watchEffect(() => {
-      jsonHandler(initAirUrl)
-    })
+watchEffect(() => {
+  jsonHandler(initAirUrl)
+})
 
-    const matchContent = computed(() => {
-      return originData.value.sort((x,y) => x.ForecastDate > y.ForecastDate).sort((a,b) => a === b).filter(e => e.Area.includes(searchContent.value))
-    })
+const matchContent = computed(() => {
+  return originData.value.sort((x,y) => x.ForecastDate > y.ForecastDate).sort((a,b) => a === b).filter(e => e.Area.includes(searchContent.value))
+})
 
-    const jumpTop = () => window.scrollTo(0, 0)
-
-    return { originData, error, matchContent, jumpTop, showView, loadView, loadState, passSite, setPassSite, searchContent }
-  }
-}
+const jumpTop = () => window.scrollTo(0, 0)
 </script>

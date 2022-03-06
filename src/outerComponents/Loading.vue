@@ -25,14 +25,11 @@
     </div>
 </template>
 
-<script>
-export default {
-  name: 'Loading',
-  props: { 
+<script setup>
+const props = defineProps({
     matchContent: Array || Object,
     searchContent: String,
     loadState: Boolean,
     error: null,
-  },
-}
+})
 </script>

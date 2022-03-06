@@ -3,9 +3,3 @@
     make by upfloor5
   </div>
 </template>
-
-<script>
-export default {
-  name: 'Footer'
-}
-</script>

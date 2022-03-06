@@ -10,15 +10,15 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import useView from '../../composables/useView'
 
-export default {
-  props: ['passSite'],
-  setup() {
-    const { loadView } = useView()
-
-    return { loadView }
+const props = defineProps({
+  passSite: {
+    type: Object,
+    required: true
   }
-}
+})
+
+const { loadView } = useView()
 </script>

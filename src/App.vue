@@ -8,15 +8,7 @@
   <Footer />
 </template>
 
-<script>
+<script setup>
 import Nav from './outerComponents/Nav.vue'
 import Footer from './outerComponents/Footer.vue'
-
-export default {
-  name: 'App',
-  components: {
-    Nav,
-    Footer
-  },
-}
 </script>

@@ -30,7 +30,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, watchEffect, computed } from 'vue'
 import SingleWater from './SingleWater.vue'
 import Loading from '../../outerComponents/Loading.vue'
@@ -38,26 +38,18 @@ import getData from '../../composables/getData.js'
 import { useState } from '../../composables/state.js'
 import useView from '../../composables/useView'
 
-export default {
-  name: "Water",
-  components: { SingleWater, Loading },
-  setup() {
-    const { showView, loadView, initWaterUrl, loadState } = useView()
-    const [passSite, setPassSite] = useState('')
-    const searchContent = ref('')
-    const { originData, error, jsonHandler } = getData()
+const { showView, loadView, initWaterUrl, loadState } = useView()
+const [passSite, setPassSite] = useState('')
+const searchContent = ref('')
+const { originData, error, jsonHandler } = getData()
 
-    watchEffect(() => {
-      jsonHandler(initWaterUrl)
-    })
+watchEffect(() => {
+  jsonHandler(initWaterUrl)
+})
 
-    const matchContent = computed(() => {
-      return originData.value.filter(e => e.County.includes(searchContent.value) || e.Township.includes(searchContent.value) || e.Area.includes(searchContent.value))
-    })
+const matchContent = computed(() => {
+  return originData.value.filter(e => e.County.includes(searchContent.value) || e.Township.includes(searchContent.value) || e.Area.includes(searchContent.value))
+})
 
-    const jumpTop = () => window.scrollTo(0, 0)
-
-    return { originData, error, matchContent, jumpTop, showView, loadView, loadState, passSite, setPassSite, searchContent }
-  }
-}
+const jumpTop = () => window.scrollTo(0, 0)
 </script>
