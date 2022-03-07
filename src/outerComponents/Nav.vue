@@ -9,7 +9,13 @@
 <script>
 import { useState } from '../composables/state.js'
 
-const [active, setActive] = useState(false)
+export default {
+  created() {
+    window.addEventListener("scroll", this.handleScroll)
+    window.addEventListener("scroll", this.handleScrollX)
+  },
+  setup() {
+    const [active, setActive] = useState(false)
     const handleScroll = () => {
       if(window.scrollY > 20) {
         setActive(true)
@@ -17,14 +23,6 @@ const [active, setActive] = useState(false)
         setActive(false)
       }
     }
-
-export default {
-  created() {
-    window.addEventListener("scroll", this.handleScroll)
-    window.addEventListener("scroll", this.handleScrollX)
-  },
-  setup() {
-    
 
     return { active, handleScroll }
   }

@@ -8,9 +8,9 @@ const store = createStore({
     return {
       showView: false,
       loadState: true,
-      setAirUrl: `https://data.epa.gov.tw/api/v1/aqf_p_01?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json`,
-      setHomeUrl: `https://data.epa.gov.tw/api/v1/aqx_p_02?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json`,
-      setWaterUrl: `https://data.epa.gov.tw/api/v1/acidr_p_01?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json`,
+      setAirUrl: `https://data.epa.gov.tw/api/v1/aqf_p_01?limit=1000&api_key=${process.env.VUE_APP_API_KEY}&format=json`,
+      setHomeUrl: `https://data.epa.gov.tw/api/v1/aqx_p_02?limit=1000&api_key=${process.env.VUE_APP_API_KEY}&format=jsonn`,
+      setWaterUrl: `https://data.epa.gov.tw/api/v1/acidr_p_01?limit=1000&api_key=${process.env.VUE_APP_API_KEY}&format=json`,
     }
   },
   mutations: { 

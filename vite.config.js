@@ -5,7 +5,8 @@ module.exports = defineConfig({
   plugins: [vue()],
   define: {
     'process.env': {
-      BASE_URL: "http://localhost:3001/"
+      BASE_URL: "http://localhost:3001/",
+      VUE_APP_API_KEY: "9be7b239-557b-4c10-9775-78cadfc555e9",
     },
   },
   runtimeCompiler: true,
